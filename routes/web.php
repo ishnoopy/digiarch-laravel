@@ -28,7 +28,7 @@ Route::view("/login", "auth.login")->name("login");
 Route::post('/login', [AuthController::class, 'login']);
 
 //user signup
-Route::view("/signup", "auth.signup")->name("signup");
+Route::get("/signup", [AuthController::class, 'showSignUpView'])->name("signup");
 Route::post('/signup', [AuthController::class, 'signup']);
 
 //user logout

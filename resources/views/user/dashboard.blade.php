@@ -26,10 +26,11 @@
     <section class="user-dashboard">
       <div class="icon-prof">
         <div class="user-dashboard__container">
-          <h2 class="user-dashboard__title">User Details</h2>
+          <h2 class="user-dashboard__title">Faculty Details</h2>
             <div>
               <p>First Name: <strong>{{$user->first_name}}</strong></p>
               <p>Last Name: <strong>{{$user->last_name}}</strong></p>
+              <p>Department: <strong>{{$user->department_name}}</strong></p>
               <p>Email Address: <strong>{{$user->email_address}}</strong></p>
               <p>Date Created: <strong>{{$user->created_at}}</strong></p>
             </div>

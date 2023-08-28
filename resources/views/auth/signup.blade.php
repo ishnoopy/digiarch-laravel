@@ -38,6 +38,15 @@
         <h3>Last Name</h3>
         <input type="text" name="last_name" id="username" placeholder="e.g. Martinez" autocomplete="off" required />
       </div>
+      <div id="name-container">
+        <h3>Department</h3>
+        <select name="department_id" id="department" required>
+          <option value="" disabled selected>Select Department</option>
+          @foreach ($departments as $department)
+          <option value="{{ $department->id }}">{{ $department->name }}</option>
+          @endforeach
+        </select>
+      </div>
       <!-- EMAIL INPUT -->
       <div id="email-container">
         <h3>Email</h3>

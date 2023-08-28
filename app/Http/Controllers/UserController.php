@@ -17,12 +17,18 @@ use Illuminate\Support\Facades\Route;
 class UserController extends Controller
 {
     public function getUserDetails() {
-        $user = User::where('id', session('user_id'))->first();
+        $user = User::with('department')->where('id', session('user_id'))->first();
+        $user->department_name = $user->department->name;
         return view('user.dashboard', ['user' => $user]);
     }
 
     public function getAllThesis() {
-        $theses = Thesis::with('department', 'course')->get();
+        if(session('department_id') == 5) {
+            $theses = Thesis::with('department', 'course')->get();
+        }else{
+            $theses = Thesis::with('department', 'course')->where('department_id', session('department_id'))->get();
+        }
+        
         $departments = Department::all();
         $courses = Course::all();
     
@@ -65,7 +71,11 @@ class UserController extends Controller
     }
 
     public function getFormattedThesis() {
-        $theses = Thesis::with('department', 'course')->get();
+        if(session('department_id') == 5) {
+            $theses = Thesis::with('department', 'course')->get();
+        }else{
+            $theses = Thesis::with('department', 'course')->where('department_id', session('department_id'))->get();
+        }
         $departments = Department::all();
         $courses = Course::all();
     
@@ -229,7 +239,12 @@ class UserController extends Controller
     }
 
     public function getAllTopics() {
-        $theses = Thesis::all();
+        if(session('department_id') == 5) {
+            $theses = Thesis::all();
+        }else{
+            $theses = Thesis::where('department_id', session('department_id'))->get();
+        }
+        
         $topics = array();
     
         foreach ($theses as $thesis) {
@@ -277,21 +292,41 @@ class UserController extends Controller
         $topics = $this->getAllTopics();
 
 
+        $departmentId = session('department_id');
 
-        $theses = Thesis::with('department', 'course')
-            ->where('title', 'LIKE', '%' . $query . '%')
-            ->orWhere('published_year', 'LIKE', '%' . $query . '%')
-            ->orWhereHas('department', function ($departmentQuery) use ($query) {
-                $departmentQuery->where('name', 'LIKE', '%' . $query . '%');
-            })
-            ->orWhereHas('course', function ($courseQuery) use ($query) {
-                $courseQuery->where('name', 'LIKE', '%' . $query . '%');
-            })
-            ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
-            ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%'])
-            ->get();
-
-   
+        $theses = Thesis::with('department', 'course');
+    
+        if ($departmentId == 5) {
+            $theses = $theses->where(function ($thesisQuery) use ($query) {
+                $thesisQuery->where('title', 'LIKE', '%' . $query . '%')
+                    ->orWhere('published_year', 'LIKE', '%' . $query . '%')
+                    ->orWhereHas('department', function ($departmentQuery) use ($query) {
+                        $departmentQuery->where('name', 'LIKE', '%' . $query . '%');
+                    })
+                    ->orWhereHas('course', function ($courseQuery) use ($query) {
+                        $courseQuery->where('name', 'LIKE', '%' . $query . '%');
+                    })
+                    ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
+                    ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%']);
+            });
+        } else {
+            $theses = $theses->where('department_id', $departmentId)
+                ->where(function ($thesisQuery) use ($query) {
+                    $thesisQuery->where('title', 'LIKE', '%' . $query . '%')
+                        ->orWhere('published_year', 'LIKE', '%' . $query . '%')
+                        ->orWhereHas('department', function ($departmentQuery) use ($query) {
+                            $departmentQuery->where('name', 'LIKE', '%' . $query . '%');
+                        })
+                        ->orWhereHas('course', function ($courseQuery) use ($query) {
+                            $courseQuery->where('name', 'LIKE', '%' . $query . '%');
+                        })
+                        ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
+                        ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%']);
+                });
+        }
+        
+        $theses = $theses->get();
+        
 
         foreach ($theses as $thesis) {
             $authors = $thesis->author; // Assuming 'author' is the JSON field in the database

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 // Model
 use App\Models\User;
+use App\Models\Department;
 
 class AuthController extends Controller
 {
@@ -14,11 +15,12 @@ class AuthController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        $user = User::where('email_address', $email)->first();
+        $user = User::with('department')->where('email_address', $email)->first();
         var_dump($user->is_admin);
         if ($user && password_verify($password, $user->password)) {
             // Authentication passed...
             session(['user_id' => $user->id]);
+            session(['department_id' => $user->department->id]);
 
             if ($user->is_admin == 1) {
                 session(['is_admin' => true]); 
@@ -32,8 +34,14 @@ class AuthController extends Controller
         return redirect()->route('login')->withErrors(['error' => 'Invalid credentials.'])->withInput();
     }
 
+    public function showSignUpView() {
+        $departments = Department::all();
+
+        return view('auth.signup', ['departments' => $departments]);
+    }
+
     public function signup(Request $request) {
-        $credentials = $request->only('first_name', 'last_name', 'email', 'password');
+        $credentials = $request->only('first_name', 'last_name', 'email', 'password', 'department_id');
 
         // Check if email already exists.
         $existingUser = User::where('email_address', $credentials['email'])->first();
@@ -42,6 +50,7 @@ class AuthController extends Controller
         }
 
         $user = User::create([
+            'department_id' => $credentials['department_id'],
             'first_name' => $credentials['first_name'],
             'last_name' => $credentials['last_name'],
             'email_address' => $credentials['email'],
