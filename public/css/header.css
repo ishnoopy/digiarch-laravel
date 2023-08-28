@@ -1,0 +1,159 @@
+/* NAVIGATION CONTENT */
+nav{
+  color: #FFFFFF;
+  background-color: #28282B;
+}
+
+#nav-container{
+  height: 10vh;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#nav-container a{
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  height: 100%;
+}
+
+#nav-container h1 > a{
+  background: url(/images/logo.png)no-repeat center center/cover;
+  height: 5rem;
+  width: 5rem;
+  margin-left: 2rem;
+  transition: .3s;
+  cursor: pointer;
+}
+
+#nav-container h1 > a:hover{
+  transform: scale(1.175);
+}
+
+#nav-container h1 span{
+  color: #00ADB5;
+}
+
+#nav-container ul{
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+#nav-container li{
+  height: 100%;
+  padding: 0rem 1rem;
+  list-style: none;
+  transition: .1s;
+  display: flex;
+  align-items: center;
+}
+
+#nav-container li:hover{
+  cursor: pointer;
+  border-bottom: .25rem solid #00ADB5;
+}
+
+#profile-container{
+  margin: 0rem 1rem;
+  transition: 1s;
+}
+
+#profile-container i:hover{
+  transform: scale(1.4);
+  color: #00ADB5;
+}
+
+#menu-container{
+  display: none;
+}
+
+#menu-container button{
+  background-color: transparent;
+  color: #FFFFFF;
+  border: none;
+  padding: .5rem;
+}
+
+#menu-container button:hover{
+  cursor: pointer;    
+  color: #00ADB5;
+}
+
+#menu-container i{
+  font-size: 1.25rem;
+}
+@media only screen and (max-width: 800px) {
+  #footer-container{
+      flex-direction: column;
+      align-items: center;
+  }
+  #information-container{
+      display: flex;
+      justify-content: center;
+  }    
+  #about-container div{
+      justify-content: center;
+  } 
+}
+@media only screen and (max-width: 900px) {
+  #nav-container{
+      display: block;
+      overflow: hidden;
+      transition: 1s;
+  }
+  #nav-container h1{
+      font-size: 1.4rem;
+      margin: 0 .5rem 0 .5rem;
+  }
+  #nav-container h1 a{
+      height: 3rem;
+      width: 3rem;
+      margin-right: .25rem;
+  }
+  #nav-container div{
+      height: 10vh;
+      display: flex;
+      justify-content: space-around;
+  }
+  #menu-container{
+      display: block;
+      
+  }
+  #nav-button{
+      transition: 1s;
+  }
+
+  #nav-container ul{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin: 0;
+  }
+  #nav-container li{
+      padding: 0;
+      width: 100%;
+      padding-left: 2rem;
+  }
+  #nav-container li:hover{
+      background-color: #00ADB5;
+      border-bottom: none;
+  }
+  .show-link{
+      height: 260px !important;
+      
+  }
+  .rotate-menu{
+      transform: rotate(-90deg);
+  }
+  #profile-container{
+      margin: 1rem 0;
+      width: 100%;
+  }
+}
+

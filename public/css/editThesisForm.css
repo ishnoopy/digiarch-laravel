@@ -1,0 +1,10 @@
+body{
+    background-color: #f2f2f2;
+    padding: 2rem;
+
+    background-image: url(/images/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.95;
+}

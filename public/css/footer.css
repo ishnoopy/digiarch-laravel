@@ -1,0 +1,111 @@
+*{
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
+  list-style: none;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+footer{
+  background-color: #28282B;
+  height: fit-content;
+  padding: 2rem 2rem 0rem 2rem;
+  color: #FFFFFF;
+}
+#footer-container{
+  display: flex;
+  justify-content: space-around;
+  border-bottom: #FFFFFF 1px solid;
+}
+.footer-div{
+  width: 25rem;
+}
+#information-container{
+
+  font-size: .5rem;
+}
+#information-container img{
+  width: 3rem;
+}
+#information-container li{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0 1rem 1rem 1rem;
+}
+#information-container li:nth-child(2), 
+#information-container li:nth-child(3),
+#information-container li:nth-child(4)
+{
+  font-size: .8rem;
+  margin: 1.5rem 1rem;
+}
+#information-container i,#information-container img{
+  margin-right: 1rem;
+}
+#information-container a{
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+#information-container a:hover{
+  transition: .5s;
+  color:#00ADB5;
+}
+
+#social-links-container,#about-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+#social-links-container h1{
+  font-size: 1rem;
+}
+#social-links-container ul{
+  margin: 1rem;
+  width: 10rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#social-links-container a{
+  color: #FFFFFF;
+  transition: .5s;
+}
+#social-links-container a:hover{
+  transform: scale(1.2);
+  color:#00ADB5;
+}
+#about-container h1{
+  font-size: 1rem;
+}
+#about-container div{
+  margin: 1rem 0rem;
+  width: flex;
+  display: flex;
+  justify-content: space-between;
+}
+#about-container li{
+  padding: .3rem;
+  font-size: .8rem;
+}
+#copyright{
+  padding: .5rem;
+  display: flex;
+  justify-content: center;   
+}
+@media only screen and (max-width: 1200px) {
+  .description-container{
+      display: flex;
+      flex-direction: column;
+  }
+  .description{
+      padding: 1rem;
+      margin: 0%;
+  }
+  .title{
+      padding: 1rem;
+  }
+}

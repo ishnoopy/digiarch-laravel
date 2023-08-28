@@ -1,0 +1,118 @@
+/* body */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  max-width: auto;
+  max-height: auto;
+}
+
+
+.chart{
+  max-width: 800px;
+  min-width: 800px;
+  border: 2px solid;
+  padding: 5px;
+}
+
+button{
+  background-color: #f2f2f2;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+/* main content */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 90vh;
+  overflow-y: auto;
+}
+
+.actions-div{
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.actions-div .btn{
+
+  background-color: #f2f2f2;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+form {
+  margin-top: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+select {
+  margin-right: 0.5rem;
+}
+
+input[type="submit"] {
+  background-color: #00adb5;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #00747a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+td{
+  text-align: left;
+}
+
+th {
+  text-align: center;
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #00adb5;
+}
+
+a:hover {
+  color: #999;
+}
+
+

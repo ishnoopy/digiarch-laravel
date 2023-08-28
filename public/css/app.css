@@ -1,0 +1,166 @@
+@import url(./header.css);
+@import url(./footer.css);
+html{
+    scroll-behavior: smooth;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+/* MAIN CONTENT */
+main{
+    position: relative;
+    height: fit-content;
+    background-color: azure;
+}
+.strand-container
+{
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    cursor: pointer;
+}
+.stem-container{
+    background: url(/images/bg.jpg) no-repeat center center/cover;
+}
+
+.strand-container div{
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 1;
+    background-color: rgba(0,0,0,.5);
+    filter: blur(1px);
+}
+.strand-container a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: inherit;
+    height: inherit;
+    font-size: 1rem;
+    position: absolute;
+    color: #FFFFFF;
+    z-index: 2;
+    transition: 1s ease;
+    text-align: center;
+}
+.strand-container a:hover{
+    font-size: 1.1rem;
+}
+.strand-container h1{
+    padding: 0rem 1rem;
+}
+.container-breather{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.title{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0rem;
+    text-align: center;
+
+}
+
+.description-container{
+    display: flex;
+    justify-content: space-around;
+    flex: 4;
+    flex-shrink: 1;
+    color: black;
+    width: 100%;
+    margin-bottom: 2rem;
+
+}
+.crop{
+    width: fit-content; 
+}
+.description{
+    flex: 1;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 0rem 2rem 2rem 2rem;
+    
+}
+.description:hover{
+    transform: scale(1.05);
+    transition: .5s;
+}
+
+.description h1{
+    margin: 1rem 0rem 2rem 0rem;
+}
+.description p{
+    font-size: 1.2rem;
+}
+#arrow-up{
+    right: 1rem;
+    bottom: 1rem;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00ADB5;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    z-index: 3;
+    cursor: pointer;
+    transition: .5s;
+}
+#arrow-up i{
+    font-size: 1.75rem;
+    color: #28282B ;
+    transition: .5s;
+}
+#arrow-up:hover{
+    transform: scale(1.2);
+}
+
+.report-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem;
+}
+
+.table-report{
+    max-width: 800px;
+    border: 2px solid;
+    padding: 5px;
+}
+
+/* FOOTER RESPONSIVE CODE */
+@media only screen and (max-width: 1200px) {
+    .description-container{
+        display: flex;
+        flex-direction: column;
+    }
+    .description{
+        padding: 1rem;
+        margin: 0%;
+    }
+    .title{
+        padding: 1rem;
+    } 
+}
