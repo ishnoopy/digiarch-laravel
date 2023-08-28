@@ -288,6 +288,7 @@ class UserController extends Controller
                 $courseQuery->where('name', 'LIKE', '%' . $query . '%');
             })
             ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
+            ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%'])
             ->get();
 
    
