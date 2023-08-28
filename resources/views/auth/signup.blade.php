@@ -26,7 +26,7 @@
           <div id="title-underline"></div>
         </h1>
         <div id="close-btn">
-          <a href="{{ route('home') }}"><i class="fa-solid fa-xmark"></i>
+          <a href="{{ route('login') }}"><i class="fa-solid fa-xmark"></i>
         </div></a>
       </div>
       <!-- NAME INPUT -->
