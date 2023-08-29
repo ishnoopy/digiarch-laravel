@@ -26,7 +26,7 @@ class UserController extends Controller
         if(session('department_id') == 5) {
             $theses = Thesis::with('department', 'course')->get();
         }else{
-            $theses = Thesis::with('department', 'course')->where('department_id', session('department_id'))->get();
+            $theses = Thesis::with('department', 'course')->where('department_id', session('department_id'))->orWhere('department_id', 5)->get();
         }
         
         $departments = Department::all();
@@ -74,7 +74,7 @@ class UserController extends Controller
         if(session('department_id') == 5) {
             $theses = Thesis::with('department', 'course')->get();
         }else{
-            $theses = Thesis::with('department', 'course')->where('department_id', session('department_id'))->get();
+            $theses = Thesis::with('department', 'course')->where('department_id', 5)->orWhere('department_id', session('department_id'))->get();
         }
         $departments = Department::all();
         $courses = Course::all();
@@ -242,7 +242,7 @@ class UserController extends Controller
         if(session('department_id') == 5) {
             $theses = Thesis::all();
         }else{
-            $theses = Thesis::where('department_id', session('department_id'))->get();
+            $theses = Thesis::where('department_id', session('department_id'))->orWhere('department_id', 5)->get();
         }
         
         $topics = array();
@@ -310,7 +310,7 @@ class UserController extends Controller
                     ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%']);
             });
         } else {
-            $theses = $theses->where('department_id', $departmentId)
+            $theses = $theses->where('department_id', 5)->orWhere('department_id', $departmentId)
                 ->where(function ($thesisQuery) use ($query) {
                     $thesisQuery->where('title', 'LIKE', '%' . $query . '%')
                         ->orWhere('published_year', 'LIKE', '%' . $query . '%')
