@@ -18,13 +18,14 @@ class CreateThesisTable extends Migration
             $table->integer('department_id');
             $table->integer('course_id');
             $table->string('title')->nullable();
-            $table->text('author')->nullable();
+            $table->json('author')->nullable();
             $table->text('abstract')->nullable();
-            $table->binary('file');
-            $table->integer('view_count')->nullable();
+            $table->string('file_url')->nullable();
+            $table->integer('view_count')->default(0);
             $table->integer('download_count')->default(0);
+            $table->json('keywords')->nullable();
             $table->integer('published_year')->nullable();
-            $table->dateTime('created_at')->nullable();
+            $table->timestamps();
             
             $table->foreign('course_id', 'fk_thesis_courses1')->references('id')->on('courses');
             $table->foreign('department_id', 'fk_thesis_departments1')->references('id')->on('departments');

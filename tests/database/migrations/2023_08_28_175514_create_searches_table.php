@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSearchLogTable extends Migration
+class CreateSearchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSearchLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('search_log', function (Blueprint $table) {
+        Schema::create('searches', function (Blueprint $table) {
             $table->integer('id')->primary();
             $table->string('keyword', 45)->nullable();
             $table->string('count', 45)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateSearchLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('search_log');
+        Schema::dropIfExists('searches');
     }
 }
