@@ -17,7 +17,6 @@ html{
 
 /* MAIN CONTENT */
 main{
-    position: relative;
     height: fit-content;
     background-color: azure;
 }
