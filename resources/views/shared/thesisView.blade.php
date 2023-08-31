@@ -27,27 +27,27 @@
       <div class="result-container">
        <div class="result-item">
           <div class="content-header">
-            <h1>{{$thesis->title}}</h1>
+            <h2>{{$thesis->title}}</h2>
             <div>
-              <p><strong>Author/s:</strong> {{$thesis->formattedAuthors}}</p>
-              <p><strong>Abstract:</strong> {{$thesis->abstract}}</p>
-              <p><strong>Year Published:</strong> {{$thesis->published_year}}</p>
-              <p><strong>Department:</strong> {{$thesis->departmentName}}</p>
-              <p><strong>Course:</strong> {{$thesis->courseName}}</p>
+            <div id="pdf-container">
+              <embed src='{{ asset('thesis/'.$thesis->file_url) }}#toolbar=0' type='application/pdf' width='100%' height='600px' />
+            </div>
               <div class="buttons">
                 <p><a href="{{ url()->previous() }}">Back</a></p>
-                <p><a href="{{ asset('thesis/'.$thesis->file_url) }}" data-target-id="{{$thesis->id}}" class="download_btn" target='_blank'>Download</a></p>
               </div>
             </div>
           </div>
        </div>
       </div>
     </section>
+
+
   </main>
 
   <!-- FOOTER -->
   @include('shared.footer')
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
   <script src="{{ asset('js/header.js') }}"></script>
   <script src="{{ asset('js/dashboard.js') }}"></script>
   <script src="{{ asset('js/thesisView.js') }}"></script>

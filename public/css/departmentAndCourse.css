@@ -1,0 +1,73 @@
+body {
+  background-color: azure;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  min-height: 80vh;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  max-width: 800px;
+}
+
+.flex {
+  display: flex;
+}
+
+.add-btn {
+  background-color: #f2f2f2;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.courses-div, .departments-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+th, td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  min-height: 60px;
+}
+
+
+td{
+  text-align: left;
+}
+
+th {
+  text-align: center;
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #00adb5;
+}
+
+a:hover {
+  color: #999;
+}

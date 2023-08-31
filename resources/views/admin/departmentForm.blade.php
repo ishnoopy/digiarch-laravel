@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="{{ asset('css/thesisForm.css') }}">
 </head>
 <body>
-
   <main>
     <section class="container">
       <h2 class="title">Add department</h2>

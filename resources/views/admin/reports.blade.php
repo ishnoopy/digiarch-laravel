@@ -25,6 +25,8 @@
    <main class="report-main">
     <h1>Reports according to:</h1>
     <button id="toggleButton">Show Table</button>
+    <a href="{{ route('export-reports') }}" class="btn btn-primary">Export CSV</a>
+
 
     <h2>Documents by Views</h2>
     <table class="table-report table" style="display: none;">
@@ -42,27 +44,9 @@
       @endforeach
     </table>
     <div>
-        <canvas id="viewsChart" class="chart"></canvas>
+        <canvas id="viewsChart" data-documents="{{$theses}}" class="chart"></canvas>
     </div>
 
-    <h2>Documents by Downloads</h2>
-    <table class="table-report table" style="display: none;">
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Download Count</th>
-      </tr>     
-      @foreach ($theses as $thesis)
-      <tr>
-        <td>{{$thesis->id}}</td>
-        <td>{{$thesis->title}}</td>
-        <td>{{$thesis->download_count}}</td>
-      </tr>
-      @endforeach  
-    </table>
-    <div>
-        <canvas id="downloadsChart" class="chart" data-documents="{{$theses}}"></canvas>
-    </div>
 
     <h2>Topics by Searches</h2>
       <table class="table-report table" id="keywordsTable" style="display: none;">

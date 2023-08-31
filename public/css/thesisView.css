@@ -1,7 +1,18 @@
+main {
+  display: flex;
+  justify-content: center;
+  background: url(/images/dark.jpg) no-repeat center center/cover;
+}
+
+#pdf-container {
+  min-width: 900px;
+  
+}
+
 .container {
   display: center;
   height: 100vh;
-  background: url(/images/dark.jpg) no-repeat center center/cover;
+
 }
 
 .content-header{

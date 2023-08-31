@@ -4,11 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIGIARCH</title>
+  <script src="https://kit.fontawesome.com/feb316d0c3.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
   <link rel="stylesheet" href="{{ asset('css/thesisForm.css') }}">
 </head>
 <body>
+  @include('shared.header')
 
   <main>
+    <a class="back-btn" href="{{ route('documents') }}"><i class="fa-solid fa-arrow-left"></i></a>
+
     <section class="container">
       <h2 class="title">Upload Thesis</h2>
 
@@ -52,5 +58,7 @@
       </div>
     </section>
   </main>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ asset('js/thesisForm.js') }}"></script>
 </body>
 </html>

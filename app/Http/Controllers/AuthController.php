@@ -8,16 +8,34 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Department;
 
+// Repositories (Services)
+use App\Repositories\UserRepository;
+
+// DTOs
+use App\DTOs\CreateUserDTO;
+use App\DTOs\LoginUserDTO;
+
 class AuthController extends Controller
 {
-    public function login(Request $request) {
-        $credentials = $request->only('email', 'password');
-        $email = $request->email;
-        $password = $request->password;
+    protected UserRepository $userRepository;
 
-        $user = User::with('department')->where('email_address', $email)->first();
-        var_dump($user->is_admin);
-        if ($user && password_verify($password, $user->password)) {
+    public function __construct(UserRepository $userRepository) {
+        $this->userRepository = $userRepository;
+    }
+
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $loginUserDTO = new LoginUserDTO();
+        $loginUserDTO->email_address = $request->email;
+        $loginUserDTO->password = $request->password;
+
+        $user = $this->userRepository->login($loginUserDTO);
+        
+        if ($user) {
             // Authentication passed...
             session(['user_id' => $user->id]);
             session(['department_id' => $user->department->id]);
@@ -31,7 +49,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect()->route('login')->withErrors(['error' => 'Invalid credentials.'])->withInput();
+        return redirect()->route('login')->withInput()->withErrors(['error' => 'Invalid credentials.'])->withInput();
     }
 
     public function showSignUpView() {
@@ -41,22 +59,21 @@ class AuthController extends Controller
     }
 
     public function signup(Request $request) {
-        $credentials = $request->only('first_name', 'last_name', 'email', 'password', 'department_id');
+
+        $userDTO = new CreateUserDTO();
+        $userDTO->first_name = $request->first_name;
+        $userDTO->last_name = $request->last_name;
+        $userDTO->email_address = $request->email;
+        $userDTO->password = $request->password;
+        $userDTO->department_id = $request->department_id;
+        $userDTO->is_admin = 0;
 
         // Check if email already exists.
-        $existingUser = User::where('email_address', $credentials['email'])->first();
-        if ($existingUser) {
+        if ($this->userRepository->checkIfEmailExists($userDTO->email_address)) {
             return redirect()->route('signup')->withErrors(['email' => 'Email already taken.'])->withInput();
         }
 
-        $user = User::create([
-            'department_id' => $credentials['department_id'],
-            'first_name' => $credentials['first_name'],
-            'last_name' => $credentials['last_name'],
-            'email_address' => $credentials['email'],
-            'password' => password_hash($credentials['password'], PASSWORD_DEFAULT),
-            'is_admin' => 0
-        ]);
+        $this->userRepository->createUser($userDTO);
 
         return redirect()->route('signup')->with('success', 'Account created successfully.');
     }

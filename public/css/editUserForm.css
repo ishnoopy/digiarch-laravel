@@ -1,0 +1,15 @@
+body{
+  background-color: azure;
+}
+main{
+  padding: 1rem;
+}
+
+.back-btn{
+  margin: 1rem;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: #fff;
+  color: #000;
+}

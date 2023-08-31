@@ -24,7 +24,7 @@
   <!-- MAIN CONTENT -->
   <main>
     <section class="container">
-    <form action="{{ route('filter-thesis') }}" method="post">
+    <form class="filter-form" action="{{ route('filter-thesis') }}" method="post">
         @csrf
         <label for="year">Filter by year:</label>
         <select name="year" id="year">
@@ -63,9 +63,8 @@
         <input type="submit" value="Filter">
       </form>
 
-      <form action="">
-        
-      </form>
+      <a class="upload-thesis-btn" href="{{ route('thesis-form') }}"> <i class="fa-solid fa-circle-plus"></i> Upload Thesis</a>
+
 
       <table>
         <tr>

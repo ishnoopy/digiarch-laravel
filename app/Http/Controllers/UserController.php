@@ -11,11 +11,22 @@ use App\Models\Department;
 use App\Models\Course;
 use App\Models\Search;
 
+// Repositories
+use App\Repositories\ThesisRepository;
+use App\Repositories\DepartmentRepository;
+use App\Repositories\CourseRepository;
+
 use Illuminate\Support\Facades\Route;
 
 
 class UserController extends Controller
 {
+    public function __construct(ThesisRepository $thesisRepository, DepartmentRepository $departmentRepository, CourseRepository $courseRepository) {
+        $this->thesisRepository = $thesisRepository;
+        $this->departmentRepository = $departmentRepository;
+        $this->courseRepository = $courseRepository;
+    }
+
     public function getUserDetails() {
         $user = User::with('department')->where('id', session('user_id'))->first();
         $user->department_name = $user->department->name;
@@ -73,9 +84,12 @@ class UserController extends Controller
     public function getFormattedThesis() {
         if(session('department_id') == 5) {
             $theses = Thesis::with('department', 'course')->get();
-        }else{
+        }else if (session('department_id')) {
             $theses = Thesis::with('department', 'course')->where('department_id', 5)->orWhere('department_id', session('department_id'))->get();
+        }else{
+            $theses = Thesis::with('department', 'course')->where('department_id', '!=', 8)->get();
         }
+
         $departments = Department::all();
         $courses = Course::all();
     
@@ -119,9 +133,9 @@ class UserController extends Controller
 
     public function getThesisById(){
         $id = Route::current()->parameter('id');
-        $thesis = Thesis::with('department', 'course')->findOrFail($id);
-        $departments = Department::all();
-        $courses = Course::all();
+        $thesis = $this->thesisRepository->getThesisById($id);
+        $departments = $this->departmentRepository->getAllDepartments();
+        $courses = $this->courseRepository->getAllCourses();
     
         // Format author and keywords data for thesis
             $authors = $thesis->author; // Assuming 'author' is the JSON field in the database
@@ -241,8 +255,10 @@ class UserController extends Controller
     public function getAllTopics() {
         if(session('department_id') == 5) {
             $theses = Thesis::all();
-        }else{
+        } else if(session('department_id')) {
             $theses = Thesis::where('department_id', session('department_id'))->orWhere('department_id', 5)->get();
+        } else {
+            $theses = Thesis::where('department_id', '!=', 8)->get();
         }
         
         $topics = array();
@@ -309,8 +325,22 @@ class UserController extends Controller
                     ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
                     ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%']);
             });
-        } else {
+        } else if (session('department_id')) {
             $theses = $theses->where('department_id', 5)->orWhere('department_id', $departmentId)
+                ->where(function ($thesisQuery) use ($query) {
+                    $thesisQuery->where('title', 'LIKE', '%' . $query . '%')
+                        ->orWhere('published_year', 'LIKE', '%' . $query . '%')
+                        ->orWhereHas('department', function ($departmentQuery) use ($query) {
+                            $departmentQuery->where('name', 'LIKE', '%' . $query . '%');
+                        })
+                        ->orWhereHas('course', function ($courseQuery) use ($query) {
+                            $courseQuery->where('name', 'LIKE', '%' . $query . '%');
+                        })
+                        ->orWhereRaw('LOWER(keywords) like ?', ['%' . strtolower($query) . '%'])
+                        ->orWhereRaw('LOWER(author) like ?', ['%' . strtolower($query) . '%']);
+                });
+        } else {
+            $theses = $theses->where('department_id', '!=', 8)
                 ->where(function ($thesisQuery) use ($query) {
                     $thesisQuery->where('title', 'LIKE', '%' . $query . '%')
                         ->orWhere('published_year', 'LIKE', '%' . $query . '%')

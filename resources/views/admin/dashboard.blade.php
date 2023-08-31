@@ -32,17 +32,13 @@
             <i class="fas fa-users admin-dashboard__icon"></i>
             <span class="admin-dashboard__label">Manage Accounts</span>
           </button>
-          <button class="admin-dashboard__button" data-page="{{ route('thesis-form') }}">
+          <button>
             <i class="fas fa-file-alt admin-dashboard__icon"></i>
-            <span class="admin-dashboard__label">Manage Files</span>
+            <span class="admin-dashboard__label"> <a href="{{ route('documents') }}">Manage Files</a></span>
           </button>
-          <button class="admin-dashboard__button" data-page="{{ route('department-form') }}">
-            <i class="fa-solid fa-school admin-dashboard__icon"></i>
-            <span class="admin-dashboard__label">Add Department</span>
-          </button>
-          <button class="admin-dashboard__button" data-page="{{ route('course-form') }}">
-            <i class="fa-solid fa-user-graduate admin-dashboard__icon"></i>
-            <span class="admin-dashboard__label">Add Course</span>
+          <button>
+          <i class="fa-solid fa-school admin-dashboard__icon"></i>
+          <span class="admin-dashboard__label"> <a href="{{ route('departments-courses', ['id' => 5]) }}">Manage Departments & Courses</a></span>
           </button>
         </div>
         <div class="message">

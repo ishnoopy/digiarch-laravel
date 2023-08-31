@@ -41,47 +41,10 @@ $( document ).ready(function() {
   });
 
 
-  const documents = $("#downloadsChart").data("documents");
+  const documents = $("#viewsChart").data("documents");
   const documentsArray = Object.values(documents);
-  const downloadLabels = documentsArray.map(document => document.title);
-  const downloadData = documentsArray.map(document => document.download_count);
 
   console.log(documents)
-
-  new Chart($('#downloadsChart'), {
-    type: 'bar',
-    data: {
-      labels: downloadLabels,
-      datasets: [{
-        label: 'most downloaded thesis',
-        data: downloadData,
-        borderWidth: 1,
-        fill: false,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-          'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)'
-        ],
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-    },
-    
-  });
 
   const viewLabels = documentsArray.map(document => document.title);
   const viewData = documentsArray.map(document => document.view_count);
