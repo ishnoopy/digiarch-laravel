@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIGIARCH</title>
-   <!-- Google Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Raleway&family=Roboto:wght@700&display=swap" rel="stylesheet" />
@@ -13,7 +14,12 @@
   <!-- CSS -->
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/thesisView.css') }}">
+
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/build/pdf.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.10.111/web/pdf_viewer.min.css" rel="stylesheet">
+
 </head>
+
 <body>
   <!-- NAVIGATION BAR -->
   <nav id="link-top">
@@ -25,19 +31,19 @@
   <main>
     <section class="container">
       <div class="result-container">
-       <div class="result-item">
+        <div class="result-item">
           <div class="content-header">
             <h2>{{$thesis->title}}</h2>
             <div>
-            <div id="pdf-container">
-              <embed src='{{ asset('thesis/'.$thesis->file_url) }}#toolbar=0' type='application/pdf' width='100%' height='600px' />
-            </div>
+              <div id="pdf-container">
+                <div id="pdf-viewer" data-file-url="{{ asset('thesis/'.$thesis->file_url) }}"></div>
+              </div>
               <div class="buttons">
                 <p><a href="{{ url()->previous() }}">Back</a></p>
               </div>
             </div>
           </div>
-       </div>
+        </div>
       </div>
     </section>
 
@@ -52,4 +58,5 @@
   <script src="{{ asset('js/dashboard.js') }}"></script>
   <script src="{{ asset('js/thesisView.js') }}"></script>
 </body>
+
 </html>
